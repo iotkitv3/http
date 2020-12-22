@@ -24,9 +24,14 @@
 *.lai
 *.la
 *.a
-*.lib
 
 # Executables
 *.exe
 *.out
 *.app
+BUILD
+.mbed
+mbed-os
+mbed-http
+MbedJSONValue
+IoTKit
