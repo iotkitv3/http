@@ -226,7 +226,7 @@ Programm compilieren und auf das Board downloaden. Unter **Private View** sollte
 
 ### Beispiel(e)
 
-Das Beispiel ThingSpeak schickt, mittels HTTP POST, Sensordaten an den ThingSpeak Cloud Dienst.
+Das Beispiel ThingSpeak schickt, mittels HTTP POST, Sensordaten an den ThingSpeak Cloud Dienst. Die Daten sind dann auf folgendem [ThingSpeak Channel](https://thingspeak.com/channels/82291) ersichtlich.
 
 <details><summary>main.cpp</summary>  
 
