@@ -52,7 +52,23 @@ Die Hypertext Markup Language (engl. für Hypertext-Auszeichnungssprache), abgek
 
 HTML-Dokumente sind die Grundlage des World Wide Web und werden von Webbrowsern dargestellt.
 
-## Beispiel(e)
+## Cloud Services
+
+![](https://raw.githubusercontent.com/iotkitv4/intro/main/images/CloudServices.png)
+
+- - -
+
+In der Cloud stehen einen Reihe von Services zur Verfügung womit die Boards mit Steuerungsinformationen, wie Sonnen Auf- und Untergang, Wetterentwicklung etc. versorgt werden können.
+
+[ProgrammableWeb](http://www.programmableweb.com/apis/directory) liefert eine Übersicht dieser Dienste.
+
+### Anwendungen 
+
+*   Intelligente Dämmerungsschaltung mit Berücksichtigung Sonnen Auf- und Untergang
+*   Intelligente, Vorausschauende Heizung, z.B. Heizung nicht aktivieren, wenn Sonnenschein angekündigt ist
+*   Vorbeugung von Unwetterschäden, z.B. durch Einfahren der Sonnenstoren bei aufkommenden Sturm
+
+### Beispiele
 
 * [Sunrise Sunset](#sunset-sunrise-json) - HTTP GET
 * [JSON](#json-javascript-object-notation)
