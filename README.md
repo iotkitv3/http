@@ -52,7 +52,7 @@ Die Hypertext Markup Language (engl. für Hypertext-Auszeichnungssprache), abgek
 
 HTML-Dokumente sind die Grundlage des World Wide Web und werden von Webbrowsern dargestellt.
 
-## Cloud Services
+## (HTTP) Cloud Services
 
 ![](https://raw.githubusercontent.com/iotkitv4/intro/main/images/CloudServices.png)
 
@@ -74,7 +74,7 @@ In der Cloud stehen einen Reihe von Services zur Verfügung womit die Boards mit
 * [JSON](#json-javascript-object-notation)
 * [ThinkSpeak](#thingspeak) - HTTP POST
 
-Weitere Beispiele findet man auf [http://os.mbed.com/teams/sandbox/code/http-example/](http://os.mbed.com/teams/sandbox/code/http-example/) oder im Verzeichnis [Cloud](../cloud).
+Weitere Beispiele, inkl. HTTPS, findet man auf [http://os.mbed.com/teams/sandbox/code/http-example/](http://os.mbed.com/teams/sandbox/code/http-example/).
 
 
 ## Sunset Sunrise (JSON)
