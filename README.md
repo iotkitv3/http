@@ -73,6 +73,7 @@ In der Cloud stehen einen Reihe von Services zur Verfügung womit die Boards mit
 * [Sunrise Sunset](#sunset-sunrise-json) - HTTP GET
 * [JSON](#json-javascript-object-notation)
 * [ThinkSpeak](#thingspeak) - HTTP POST
+* [Workflow mit Node-RED](#workflow)
 
 Weitere Beispiele, inkl. HTTPS, findet man auf [http://os.mbed.com/teams/sandbox/code/http-example/](http://os.mbed.com/teams/sandbox/code/http-example/).
 
@@ -302,3 +303,38 @@ Das Beispiel ThingSpeak schickt, mittels HTTP POST, Sensordaten an den ThingSpea
     }
 
 </p></details>
+
+## Workflow
+***
+
+> [⇧ **Nach oben**](#)
+
+![](https://raw.githubusercontent.com/iotkitv4/intro/main/images/NodeRED.png)
+
+- - -
+
+Mittels [Node-RED](https://nodered.org/) lassen sich einfache Workflows realisieren und die Protokolle testen.
+
+### Node-RED HTTP Workflow
+
+![](https://raw.githubusercontent.com/iotkitv4/intro/main/images/NodeREDHTTP.png)
+
+- - -
+
+* Benötigte Software installieren (z.B. auf einem Raspberry Pi oder einer Linux VM)
+    * [Node-RED](https://nodered.org/) - Workflow Engine.
+    * [ngrok](https://ngrok.com/) für eine Public URL. Wenn z.B. der Raspberry Pi hinter einer Firewall ist.
+* In Node-RED
+    * `http` Input Node auf Flow 1 platzieren, mit als Methode `POST` und als URL `post` eintragen.
+    * `debug` Output Node auf Flow 1 platzieren, Output auf "complete msg.object" ändern und mit Input Node verbinden.
+    * Programm mittels `Deploy` veröffentlichen.
+* mbed Teil
+    * [HTTP ThingSpeak](#thingspeak) Beispiel (main.cpp) editieren, ca. auf Zeile 16 die URL mit dem Server ersetzen wo Node-RED läuft, z.B. `http://192.168.178.200:1880/post`.
+    * Programm Compilieren und auf Board laden.
+
+Im Node-RED Fenster auf der Node `debug`, sollten jetzt alle 10 Sekunden neue Meldungen vom IoTKitV3 erscheinen.  
+
+**Links**
+ 
+ * [Home Page](https://nodered.org/)
+ * [Node-RED Einführung](https://www.youtube.com/watch?v=f5o4tIz2Zzc)
