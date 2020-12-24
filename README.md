@@ -83,8 +83,7 @@ Weitere Beispiele, inkl. HTTPS, findet man auf [http://os.mbed.com/teams/sandbox
 
 > [⇧ **Nach oben**](#)
 
-![](https://raw.githubusercontent.com/
-/intro/main/images/SunriseSunset.png)
+![](https://raw.githubusercontent.com/iotkitv3/intro/main/images/SunriseSunset.png)
 
 - - -
 
