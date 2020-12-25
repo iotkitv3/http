@@ -1,9 +1,5 @@
 {
     "config": {
-        "wifi-shield": {
-            "help": "Options are internal, WIFI_ESP8266, WIFI_ISM43362, WIFI_IDW0XX1",
-            "value": "WIFI_ESP8266"
-        },
         "wifi-ssid": {
             "help": "WiFi SSID",
             "value": "\"LERNKUBE\""
@@ -11,22 +7,27 @@
         "wifi-password": {
             "help": "WiFi Password",
             "value": "\"l3rnk4b3\""
-        },
-        "wifi-tx": {
-            "help": "TX pin for serial connection to external device",
-            "value": "PTC15"
-        },
-        "wifi-rx": {
-            "help": "RX pin for serial connection to external device",
-            "value": "PTC14"
-        },
-        "wifi-debug": {
-            "value": true
         }
     },
     "target_overrides": {
         "*": {
-            "platform.stdio-convert-newlines": true
-        }
+            "platform.stdio-convert-newlines": true,
+            "target.printf_lib": "std"
+        },
+        "DISCO_L475VG_IOT01A": {
+            "target.components_add": ["wifi_ism43362"],
+            "ism43362.provide-default": true
+        },
+        "K64F": {
+            "esp8266.provide-default" : true,
+            "esp8266.rx": "PTC14",
+            "esp8266.tx": "PTC15",
+            "esp8266.rst": "D9"
+        },
+        "NUCLEO_F303RE": {
+            "esp8266.provide-default" : true,
+            "esp8266.rx": "D2",
+            "esp8266.tx": "D10"
+        }               
     }
 }

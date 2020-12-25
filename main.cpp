@@ -4,7 +4,6 @@
 #include <string>
 #include "OLEDDisplay.h"
 #include "http_request.h"
-#include "network-helper.h"
 #include "MbedJSONValue.h"
 
 // UI
@@ -21,12 +20,23 @@ int main()
     oled.printf("Sunrise Sunset\n");
     // Connect to the network with the default networking interface
     // if you use WiFi: see mbed_app.json for the credentials
-    NetworkInterface* network = connect_to_default_network_interface();
-
+    WiFiInterface* network = WiFiInterface::get_default_instance();
     if (!network) {
-        printf("Cannot connect to the network, see serial output\n");
-        return 1;
+        printf("ERROR: No WiFiInterface found.\n");
+        return -1;
     }
+
+    printf("\nConnecting to %s...\n", MBED_CONF_APP_WIFI_SSID);
+    int ret = network->connect(MBED_CONF_APP_WIFI_SSID, MBED_CONF_APP_WIFI_PASSWORD, NSAPI_SECURITY_WPA_WPA2);
+    if (ret != 0) {
+        printf("\nConnection error: %d\n", ret);
+        return -1;
+    }
+    printf("Success\n\n");
+    printf("MAC: %s\n", network->get_mac_address());
+    SocketAddress a;
+    network->get_ip_address(&a);
+    printf("IP: %s\n", a.get_ip_address());    
 
     while( 1 )
     {
@@ -66,6 +76,6 @@ int main()
         delete get_req;
         myled = 0;
 
-        wait(10.0f);
+        thread_sleep_for( 10000 );
     }
 }
