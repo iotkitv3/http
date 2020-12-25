@@ -220,7 +220,7 @@ Programm compilieren und auf das Board downloaden. Unter **Private View** sollte
 
 **Links**
 
-*   [ThingSpeak Channel](https://thingspeak.com/channels/82291) 
+*   [ThingSpeak Channel aus Beispiel](https://thingspeak.com/channels/82291) 
 *   [Website](https://thingspeak.com/)
 *   [Einführung in ThingSpeak](http://www.codeproject.com/Articles/845538/An-Introduction-to-ThingSpeak)
 *   [ThingSpeak im Praxistest](http://blog.zuehlke.com/die-iot-plattform-thingspeak-im-praxistest/)
@@ -236,7 +236,6 @@ Das Beispiel ThingSpeak schickt, mittels HTTP POST, Sensordaten an den ThingSpea
     #include "mbed.h"
     #include "HTS221Sensor.h"
     #include "http_request.h"
-    #include "network-helper.h"
     #include "OLEDDisplay.h"
     
     // UI
@@ -252,7 +251,7 @@ Das Beispiel ThingSpeak schickt, mittels HTTP POST, Sensordaten an den ThingSpea
     // I/O Buffer
     char message[1024];
     
-    DigitalOut myled(D10);
+    DigitalOut myled(MBED_CONF_IOTKIT_LED1);
     
     int main()
     {
@@ -270,12 +269,24 @@ Das Beispiel ThingSpeak schickt, mittels HTTP POST, Sensordaten an den ThingSpea
     
         // Connect to the network with the default networking interface
         // if you use WiFi: see mbed_app.json for the credentials
-        NetworkInterface* network = connect_to_default_network_interface();
-        
+        WiFiInterface* network = WiFiInterface::get_default_instance();
         if (!network) {
-            printf("Cannot connect to the network, see serial output\n");
-            return 1;
+            printf("ERROR: No WiFiInterface found.\n");
+            return -1;
         }
+
+        printf("\nConnecting to %s...\n", MBED_CONF_APP_WIFI_SSID);
+        int ret = network->connect(MBED_CONF_APP_WIFI_SSID, MBED_CONF_APP_WIFI_PASSWORD, NSAPI_SECURITY_WPA_WPA2);
+        if (ret != 0) {
+            printf("\nConnection error: %d\n", ret);
+            return -1;
+        }
+
+        printf("Success\n\n");
+        printf("MAC: %s\n", network->get_mac_address());
+        SocketAddress a;
+        network->get_ip_address(&a);
+        printf("IP: %s\n", a.get_ip_address());
     
         while( 1 )
         {
@@ -298,7 +309,7 @@ Das Beispiel ThingSpeak schickt, mittels HTTP POST, Sensordaten an den ThingSpea
             }
             delete get_req;
             myled = 0;
-            wait(10.0f);
+            thread_sleep_for( 10000 );
         }
     }
 
