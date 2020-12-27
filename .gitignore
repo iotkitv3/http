@@ -33,6 +33,7 @@ BUILD
 .mbed
 mbed-os
 MbedJSONValue
-HTS221
-iotkit
 mbed-http
+HTS221
+bmp180
+iotkit
