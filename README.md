@@ -231,10 +231,16 @@ Das Beispiel ThingSpeak schickt, mittels HTTP POST, Sensordaten an den ThingSpea
 
 <details><summary>main.cpp</summary>  
 
+
     /** Beispiel Senden von Sensordaten an ThingSpeak
-     */
+        */
     #include "mbed.h"
+    #if MBED_CONF_IOTKIT_HTS221_SENSOR == true
     #include "HTS221Sensor.h"
+    #endif
+    #if MBED_CONF_IOTKIT_BMP180_SENSOR == true
+    #include "BMP180Wrapper.h"
+    #endif
     #include "http_request.h"
     #include "OLEDDisplay.h"
     
@@ -242,7 +248,12 @@ Das Beispiel ThingSpeak schickt, mittels HTTP POST, Sensordaten an den ThingSpea
     OLEDDisplay oled( MBED_CONF_IOTKIT_OLED_RST, MBED_CONF_IOTKIT_OLED_SDA, MBED_CONF_IOTKIT_OLED_SCL );
     
     static DevI2C devI2c( MBED_CONF_IOTKIT_I2C_SDA, MBED_CONF_IOTKIT_I2C_SCL );
+    #if MBED_CONF_IOTKIT_HTS221_SENSOR == true
     static HTS221Sensor hum_temp(&devI2c);
+    #endif
+    #if MBED_CONF_IOTKIT_BMP180_SENSOR == true
+    static BMP180Wrapper hum_temp( &devI2c );
+    #endif
     
     /** ThingSpeak URL und API Key ggf. anpassen */
     char host[] = "http://api.thingspeak.com/update";
@@ -274,14 +285,14 @@ Das Beispiel ThingSpeak schickt, mittels HTTP POST, Sensordaten an den ThingSpea
             printf("ERROR: No WiFiInterface found.\n");
             return -1;
         }
-
+    
         printf("\nConnecting to %s...\n", MBED_CONF_APP_WIFI_SSID);
         int ret = network->connect(MBED_CONF_APP_WIFI_SSID, MBED_CONF_APP_WIFI_PASSWORD, NSAPI_SECURITY_WPA_WPA2);
         if (ret != 0) {
             printf("\nConnection error: %d\n", ret);
             return -1;
         }
-
+    
         printf("Success\n\n");
         printf("MAC: %s\n", network->get_mac_address());
         SocketAddress a;
