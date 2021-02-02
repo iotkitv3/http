@@ -42,6 +42,12 @@
             "esp8266.provide-default" : true,
             "esp8266.rx": "D0",
             "esp8266.tx": "D1"
-        }                       
+        },
+        "DISCO_F769NI": {
+            "target.network-default-interface-type": "WIFI",
+            "esp8266.provide-default" : true,
+            "esp8266.rx": "D0",
+            "esp8266.tx": "D1"
+        }       
     }
 }
